@@ -1,11 +1,18 @@
 const express = require('express');
+const cors = require('cors');
 const connectToMongoDB = require('./db/connectDB');
 
 const authRoutes = require('./routes/auth.route');
 
 const app = express();
 
-// Middleware (optional for JSON)
+// CORS setup
+app.use(cors({
+  origin: "http://localhost:5173", 
+  credentials: true,
+}));
+
+// Middleware
 app.use(express.json());
 
 // Routes

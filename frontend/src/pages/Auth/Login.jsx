@@ -2,72 +2,114 @@ import React, { useState } from "react";
 import AuthLayout from "../../components/AuthLayout";
 import { useNavigate } from "react-router-dom";
 import Input from "../../components/Input";
+import { Mail, Lock, ArrowRight } from "lucide-react";
+import axios from 'axios'
 
 const Login = () => {
-
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [error, setError] = useState("")
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-  }
+    e.preventDefault();
+    setError("");
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/auth/login",
+        {
+          email,
+          password,
+        },
+        {
+          withCredentials: true, // important for cookies/JWT
+        }
+      );
+
+      console.log("Login Success:", response.data);
+
+      if (response.data.token) {
+        localStorage.setItem("token", response.data.token);
+      }
+
+      // redirect to dashboard if needed
+      window.location.href = "/";
+    } catch (err) {
+      console.error(err);
+      setError(err.response?.data?.message || "Login failed");
+    }
+  };
 
   return (
     <AuthLayout>
-      <div className="bg-white rounded-2xl p-10 border border-gray-200 shadow-lg w-full max-w-sm h-[500px] flex flex-col justify-between">
+      <div className="bg-white rounded-3xl p-10 shadow-2xl border border-gray-100 w-full max-w-md">
 
-        <div>
-          <h2 className="text-center mb-8 text-3xl font-bold text-black">
-            Welcome Back
-          </h2>
-
-          <form onSubmit={handleSubmit} className="space-y-5">
-
-            {/* Email Input */}
-            <Input
-              label="Email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              type="email"
-            />
-
-            {/* Password Input WITH eye toggle */}
-            <Input
-              label="Password"
-              placeholder="Enter your password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              type="password"
-            />
-
-            {error && (
-              <p className="text-red-500 text-sm">{error}</p>
-            )}
-
-            {/* Login Button */}
-            <button
-              type="submit"
-              className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold text-lg py-3 rounded-lg transition-all duration-200"
-            >
-              Login
-            </button>
-
-          </form>
+        {/* Header */}
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-2xl mb-4 shadow-lg">
+            <Lock className="w-8 h-8 text-white" />
+          </div>
+          <h2 className="text-3xl font-bold text-gray-900 mb-2">Welcome Back</h2>
+          <p className="text-gray-500">Enter your credentials to continue</p>
         </div>
 
-        {/* Footer */}
-        <div className="flex justify-center mt-6 gap-2 text-sm text-gray-700">
-          <p>Don't have an account?</p>
-          <span
-            onClick={() => navigate("/signup")}
-            className="text-purple-500 cursor-pointer hover:underline"
+        <form onSubmit={handleSubmit} className="space-y-5">
+
+          {/* Email Input */}
+          <Input
+            label="Email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email"
+            icon={Mail}
+            required
+          />
+
+          {/* Password Input */}
+          <Input
+            label="Password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter your password"
+            icon={Lock}
+            required
+          />
+
+
+
+          {error && (
+            <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-xl text-sm">
+              {error}
+            </div>
+          )}
+
+          {/* Login Button */}
+          <button
+          onClick={handleSubmit}
+            type="submit"
+            className="w-full bg-gradient-to-r from-green-600 to-emerald-500 hover:from-green-700 hover:to-emerald-600 text-white font-semibold text-lg py-4 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
           >
-            Sign Up
-          </span>
+            Sign In
+            <ArrowRight className="w-5 h-5" />
+          </button>
+
+        </form>
+
+        {/* Sign Up Link */}
+        <div className="mt-5 text-center">
+          <p className="text-gray-600">
+            Don't have an account?{" "}
+            <span
+              onClick={() => navigate("/signup")}
+              className="text-green-600 hover:text-green-700 font-semibold cursor-pointer hover:underline"
+            >
+              Sign Up
+            </span>
+          </p>
         </div>
 
       </div>
