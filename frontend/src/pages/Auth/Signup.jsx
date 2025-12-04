@@ -23,7 +23,6 @@ const Signup = () => {
     e.preventDefault();
     setError("");
 
-    // --- FORM VALIDATIONS ---
 
     if (!name || !email || !password || !confirmPassword) {
       setError("All fields are required.");
@@ -50,7 +49,6 @@ const Signup = () => {
       return;
     }
 
-    // --- API CALL ---
     try {
       const response = await axios.post(
         "http://localhost:5000/api/auth/signup",
@@ -139,14 +137,12 @@ const Signup = () => {
             </label>
           </div>
 
-          {/* Error */}
           {error && (
             <div className="bg-red-50 border border-red-200 text-red-600 px-3 py-2 rounded-xl text-sm">
               {error}
             </div>
           )}
 
-          {/* Button */}
           <button
             type="submit"
             className="w-full bg-gradient-to-r from-green-600 to-emerald-500 hover:from-green-700 hover:to-emerald-600 text-white font-semibold text-md py-3.5 rounded-xl transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2"
@@ -157,7 +153,6 @@ const Signup = () => {
 
         </form>
 
-        {/* Login Link */}
         <div className="mt-3 text-center">
           <p className="text-gray-600 text-sm">
             Already have an account?{" "}
