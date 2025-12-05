@@ -11,7 +11,6 @@ const AuthLayout = ({ children }) => {
         className="absolute inset-0 w-full h-full object-cover "
       />
 
-      {/* Optional dark overlay for readability */}
       <div className="absolute inset-0 bg-black/40"></div>
 
       {/* Main content over image */}

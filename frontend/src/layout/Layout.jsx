@@ -4,12 +4,7 @@ import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import HeaderBar from "../components/HeaderBar";
 
-/**
- * Combined responsive + router-aware Layout.
- * - Keeps `sidebarOpen` for responsive behaviour (used by HeaderBar/Sidebar).
- * - Keeps internal "active" id state that maps to routes and syncs with location.
- * - Passes both APIs to Sidebar so it can either call setActive(id) or navigate directly.
- */
+
 
 const NAV_ITEMS = [
   { id: "dashboard", label: "Dashboard", path: "/" },
