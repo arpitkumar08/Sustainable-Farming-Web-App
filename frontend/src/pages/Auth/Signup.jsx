@@ -71,14 +71,14 @@ const Signup = () => {
 
   return (
     <AuthLayout>
-      <div className="bg-white rounded-3xl p-8 shadow-xl border border-gray-100 max-w-md mx-auto">
+      <div className="bg-white rounded-3xl pt-5 pb-5 px-5 shadow-2xl border border-gray-100 max-w-md mx-auto">
 
         {/* Header */}
         <div className="text-center mb-6">
-          <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-emerald-500 to-green-500 rounded-2xl mb-3 shadow-md">
+          <div className="inline-flex items-center justify-center size-10 bg-gradient-to-br from-emerald-500 to-green-500 rounded-2xl mb-3 shadow-md">
             <User className="w-7 h-7 text-white" />
           </div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-1">Create Account</h2>
+          <h2 className="text-xl font-bold text-gray-900 mb-1">Create Account</h2>
           <p className="text-gray-500 text-sm">Sign up to get started</p>
         </div>
 
