@@ -8,8 +8,13 @@ import Login from "./pages/Auth/Login";
 import Signup from "./pages/Auth/Signup";
 
 // Main pages
-import Dashboard from "./pages/Dashboard";
-
+import DashboardPage from "./pages/DashboardPage";
+import MyFieldPage from "./pages/MyFieldPage";
+import CropPlannerPage from "./pages/CropPlannerPage";
+import SoilHealthPage from "./pages/SoilHealthPage";
+import WeatherAlertsPage from "./pages/WeatherAlertsPage";
+import CommunityPage from "./pages/CommunityPage";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const App = () => {
   return (
@@ -21,12 +26,12 @@ const App = () => {
 
         {/* Protected Layout Routes */}
         <Route element={<Layout />}>
-          <Route path="/" element={<Dashboard />} />
-          {/* <Route path="/missing-persons" element={<MissingPersons />} />
-          <Route path="/disasters" element={<Disasters />} />
-          <Route path="/resources" element={<Resources />} />
-          <Route path="/volunteers" element={<Volunteers />} />
-          <Route path="/alerts" element={<Alerts />} /> */}
+          <Route path="/" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
+          <Route path="/my-field" element={<ProtectedRoute><MyFieldPage /></ProtectedRoute>} />
+          <Route path="/crop-planner" element={<ProtectedRoute><CropPlannerPage /></ProtectedRoute>} />
+          <Route path="/soil-health" element={<ProtectedRoute><SoilHealthPage /></ProtectedRoute>} />
+          <Route path="/weather-alerts" element={<ProtectedRoute><WeatherAlertsPage /></ProtectedRoute>} />
+          <Route path="/community" element={<ProtectedRoute><CommunityPage /></ProtectedRoute>} />
         </Route>
       </Routes>
     </Router>
