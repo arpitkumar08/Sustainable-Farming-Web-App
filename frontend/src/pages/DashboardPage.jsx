@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import Loader from '../components/Loader';
 
 export default function DashboardPage() {
   const [methods, setMethods] = useState([]);
@@ -555,7 +556,7 @@ export default function DashboardPage() {
                   <span>{schemes.length}</span>
                 </>
               ) : (
-                <span>Loading…</span>
+                <Loader />
               )}
             </div>
             <div className="flex items-center gap-2">
