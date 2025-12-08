@@ -4,25 +4,27 @@ const connectToMongoDB = require('./db/connectDB');
 
 const authRoutes = require('./routes/auth.route');
 
+const weatherRoutes = require("./routes/weatherRoutes");
+const soilRoutes = require("./routes/soilRoutes");
+
 const app = express();
 
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 
+app.use(express.json());
 
-// CORS setup
 app.use(cors({
   origin: "http://localhost:5173", 
   credentials: true,
 }));
 
-// Middleware
 app.use(express.json());
 
-// Routes
 app.use("/api/auth", authRoutes);
+app.use("/api/weather", weatherRoutes);
+app.use("/api/soil", soilRoutes);
 
-// Connect to DB
 connectToMongoDB();
 
 const PORT = process.env.PORT || 5000;
