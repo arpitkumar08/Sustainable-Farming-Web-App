@@ -19,30 +19,33 @@ import SoilHealthPage from "./pages/SoilHealthPage";
 import WeatherAlertsPage from "./pages/WeatherAlertsPage";
 import CommunityPage from "./pages/CommunityPage";
 
+// Public Home Page
+import Home from "./pages/Home";
+
 const App = () => {
   return (
     <Router>
       <Routes>
-        {/* Public Routes */}
+
+        {/* ---------- PUBLIC ROUTES ---------- */}
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
 
-        {/* All protected pages use Layout */}
+        {/* ---------- PROTECTED ROUTES ---------- */}
         <Route
-          path="/"
           element={
             <ProtectedRoute>
               <Layout />
             </ProtectedRoute>
           }
         >
-          {/* Pages rendered inside <Outlet/> */}
-          <Route index element={<DashboardPage />} />
-          <Route path="my-field" element={<MyFieldPage />} />
-          <Route path="crop-planner" element={<CropPlannerPage />} />
-          <Route path="soil-health" element={<SoilHealthPage />} />
-          <Route path="weather-alerts" element={<WeatherAlertsPage />} />
-          <Route path="community" element={<CommunityPage />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/my-field" element={<MyFieldPage />} />
+          <Route path="/crop-planner" element={<CropPlannerPage />} />
+          <Route path="/soil-health" element={<SoilHealthPage />} />
+          <Route path="/weather-alerts" element={<WeatherAlertsPage />} />
+          <Route path="/community" element={<CommunityPage />} />
         </Route>
 
       </Routes>
